@@ -1,22 +1,25 @@
 <template>
-  <div id="app">
-    <TopBar/>
-  </div>
+    <body class="h-100">
+      <div class="container-fluid">
+        <div class="row">
+          <left-bar></left-bar>
+          <right-bar></right-bar>
+        </div>
+      </div>
+    </body>
 </template>
 
 <script>
-import TopBar from './components/TopBar.vue'
-
+import LeftBar from './components/LeftBar.vue';
+import RightBar from './components/RightBar.vue';
 export default {
-  name: 'app',
   components: {
-    TopBar
+    LeftBar,
+    RightBar
   }
 }
 </script>
 
 <style>
-#app {
 
-}
 </style>
