@@ -1,25 +1,32 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import LoginView from '../components/LoginView'
-//import AppView from '../App.vue'
+import ContentView from '../components/ContentView'
 
 Vue.use(VueRouter);
 
 export const router = new VueRouter({
-    mode : 'history',
-    routes : [
-        // {
-        //     path: '/',
-        //     redirect : '/',
-        //     component : AppView
-        // },
+    mode: 'history',
+    routes: [
+        {
+            path: '/',
+            redirect: '/main',
+        },
         {
             // path : url 주소
-            path : '/Login',
-            name : 'login',
+            path: '/login',
+            name: 'login',
             // component: url 주소로 갔을 때 표시될 컴포넌트
             //component : createListView('NewsView'),
-            component : LoginView,
+            component: LoginView,
+        },
+        {
+            // path : url 주소
+            path: '/main',
+            name: 'main',
+            // component: url 주소로 갔을 때 표시될 컴포넌트
+            //component : createListView('NewsView'),
+            component: ContentView,
         },
         // {
         //     path: '/ask',
