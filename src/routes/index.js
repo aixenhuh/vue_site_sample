@@ -17,7 +17,6 @@ export const router = new VueRouter({
             path: '/login',
             name: 'login',
             // component: url 주소로 갔을 때 표시될 컴포넌트
-            //component : createListView('NewsView'),
             component: LoginView,
         },
         {
@@ -25,7 +24,6 @@ export const router = new VueRouter({
             path: '/main',
             name: 'main',
             // component: url 주소로 갔을 때 표시될 컴포넌트
-            //component : createListView('NewsView'),
             component: ContentView,
         },
         // {

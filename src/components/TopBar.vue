@@ -68,29 +68,50 @@
             <a class="dropdown-item notification__all text-center" href="#">View all Notifications</a>
           </div>
         </li>
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle text-nowrap px-3"
-            data-toggle="dropdown"
-            href="/login"
-            v-on:click="showUserProfile"
-            role="button"
-            aria-haspopup="true"
-            aria-expanded="true"
-          >
-            <span class="d-none d-md-inline-block">Login</span>
-          </a>
-          <!-- <div class="dropdown-menu dropdown-menu-small" v-bind:class="{show : false}" v-show="isUserProfile" style="display:block">
+        <li class="nav-item dropdown" style="width:200%">
+          <template v-if="!getLoginStatus">
+            <a
+              class="nav-link dropdown-toggle text-nowrap px-3"
+              data-toggle="dropdown"
+              @click="showUserProfile"
+              role="button"
+              aria-haspopup="true"
+              aria-expanded="true"
+            >
+              <span class="d-none d-md-inline-block">Login</span>
+            </a>
+          </template>
+          <template v-if="getLoginStatus">
+            <a
+              class="nav-link dropdown-toggle text-nowrap px-3"
+              data-toggle="dropdown"
+              @click="clickUserProfile"
+              role="button"
+              aria-haspopup="true"
+              aria-expanded="true"
+            >
+              <span>loged</span>
+            </a>
+            <div
+              class="dropdown-menu dropdown-menu-small"
+              v-show="isUserProfile"
+              style="display:block;"
+            >
               <a class="dropdown-item" href="user-profile-lite.html">
-                <i class="material-icons">&#xE7FD;</i> Profile</a>
+                <i class="material-icons">&#xE7FD;</i> Profile
+              </a>
               <a class="dropdown-item" href="components-blog-posts.html">
-                <i class="material-icons">vertical_split</i> Blog Posts</a>
+                <i class="material-icons">vertical_split</i> Blog Posts
+              </a>
               <a class="dropdown-item" href="add-new-post.html">
-                <i class="material-icons">note_add</i> Add New Post</a>
+                <i class="material-icons">note_add</i> Add New Post
+              </a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item text-danger" href="#">
-                <i class="material-icons text-danger">&#xE879;</i> Logout </a>
-          </div>-->
+                <i class="material-icons text-danger">&#xE879;</i> Logout
+              </a>
+            </div>
+          </template>
         </li>
       </ul>
       <nav class="nav">
@@ -111,6 +132,16 @@
 
 <script>
 export default {
+  computed: {
+    getLoginStatus() {
+      console.log(this.$store.state.accessToken);
+      if (this.$store.state.accessToken) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  },
   data: function() {
     return {
       isUserProfile: false
@@ -118,6 +149,12 @@ export default {
   },
   methods: {
     showUserProfile() {
+      //this.isUserProfile = !this.isUserProfile;
+      this.$router.push("/login");
+    },
+    clickUserProfile() {
+      console.log("where");
+      console.log(this.isUserProfile);
       this.isUserProfile = !this.isUserProfile;
     }
   }
