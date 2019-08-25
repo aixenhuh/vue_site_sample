@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import LoginView from '../components/LoginView'
+import userProfileView from '../components/userProfileView'
 import ContentView from '../components/ContentView'
 
 Vue.use(VueRouter);
@@ -10,27 +11,24 @@ export const router = new VueRouter({
     routes: [
         {
             path: '/',
-            redirect: '/main',
+            component: ContentView,
         },
         {
             // path : url 주소
             path: '/login',
-            name: 'login',
             // component: url 주소로 갔을 때 표시될 컴포넌트
             component: LoginView,
         },
         {
             // path : url 주소
             path: '/main',
-            name: 'main',
             // component: url 주소로 갔을 때 표시될 컴포넌트
             component: ContentView,
         },
-        // {
-        //     path: '/ask',
-        //     name : 'ask',
-        //     //component: createListView('AskView'),
-        //     component : AskView,
+        {
+             path: '/userProfile',
+             name : '',
+             component : userProfileView,
         //     beforeEnter : (to, from, next) => {
         //         bus.$emit('start:spinner');
         //         store.dispatch('FETCH_LIST', to.name).then(()=> {
@@ -41,7 +39,7 @@ export const router = new VueRouter({
         //             console.log(error);
         //         });
         //     }
-        // },
+        },
         // {
         //     path: '/jobs',
         //     name : 'jobs',
@@ -68,3 +66,18 @@ export const router = new VueRouter({
         // }
     ]
 });
+
+router.beforeEach((to, from, next) => {
+    console.log(to.path);
+    if (to.path != '/main' ){
+        console.log("여기까지..?")
+        if(localStorage.getItem('token')) {   
+            console.log("여긴간");
+            return next();
+        } else {
+            console.log("여긴가")
+            next()
+        }
+    }
+    next();
+})

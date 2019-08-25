@@ -79,7 +79,7 @@ export default {
         id: this.id,
         password: this.password
       });
-      this.$router.push("/");
+      await this.$router.push("/main");
     }
   }
 };

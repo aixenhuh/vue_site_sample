@@ -8,7 +8,9 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     state: {
         login: [],
-        accessToken: null
+        accessToken: localStorage.getItem('accessToken'),
+        isAuth : false,
+        userInfo : localStorage.getItem('userInfo')
     },
     getters: {
         fetchedLogin(state) {
@@ -16,6 +18,12 @@ export const store = new Vuex.Store({
         },
         fetchedToken(state) {
             return state.accessToken
+        },
+        getIsAuth(state) {
+            return state.isAuth
+        },
+        getUserInfo(state) {
+            return state.userInfo
         }
     },
     mutations,

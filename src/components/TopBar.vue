@@ -90,7 +90,8 @@
               aria-haspopup="true"
               aria-expanded="true"
             >
-              <span>loged</span>
+              <img class="user-avatar rounded-circle mr-2" src="images/avatars/0.jpg" alt="User Avatar">
+              <span class="d-none d-md-inline-block">Sierra Brooks</span>
             </a>
             <div
               class="dropdown-menu dropdown-menu-small"
@@ -107,7 +108,7 @@
                 <i class="material-icons">note_add</i> Add New Post
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item text-danger" href="#">
+              <a class="dropdown-item text-danger" @click.prevent="onClickLogout">
                 <i class="material-icons text-danger">&#xE879;</i> Logout
               </a>
             </div>
@@ -134,7 +135,7 @@
 export default {
   computed: {
     getLoginStatus() {
-      console.log(this.$store.state.accessToken);
+      //console.log(this.$store.state.accessToken);
       if (this.$store.state.accessToken) {
         return true;
       } else {
@@ -153,9 +154,10 @@ export default {
       this.$router.push("/login");
     },
     clickUserProfile() {
-      console.log("where");
-      console.log(this.isUserProfile);
       this.isUserProfile = !this.isUserProfile;
+    },
+    onClickLogout() {
+      this.$store.dispatch("FETCH_LOGOUT").then(() => this.$router.push("/"));
     }
   }
 };
